@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import "./App.css";
+import { Header, EditPage, Post, MakePost, Footer } from "./Common/index";
 
 function App() {
+  const [isEdit, setIsEdit] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isEdit ? (
+        <EditPage setIsEdit={setIsEdit} />
+      ) : !isEdit && !isOpen ? (
+        <>
+          <Header setIsEdit={setIsEdit} />
+          <div className="post-container">
+            <Post />
+          </div>
+          <Footer setIsOpen={setIsOpen} isOpen={isOpen} />
+        </>
+      ) : (
+        <>
+          <Header setIsEdit={setIsEdit} />
+          <MakePost setIsOpen={setIsOpen} />
+        </>
+      )}
     </div>
   );
 }
