@@ -43,6 +43,8 @@
 }
 .input-image-container {
   flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 label:nth-child(7) {
