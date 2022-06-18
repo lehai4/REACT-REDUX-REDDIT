@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import "./App.css";
 import { Header, EditPage, Post, MakePost, Footer } from "./Common/index";
 
