@@ -10,6 +10,7 @@ const Input = (props) => {
           placeholder={rest.name}
           onChange={(e) => rest.setData(e.target.value)}
           className={rest?.classStyle}
+          ref={rest?.refName && rest.refName}
         />
       ) : (
         <input

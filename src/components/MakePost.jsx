@@ -3,22 +3,32 @@ import { useDispatch } from "react-redux";
 import { createPost } from "../redux/postSlide";
 import storeContent from "../db/storeContent";
 import { Section, Input } from "../Common/index";
+import { useRef } from "react";
 const MakePost = (props) => {
   const { setIsOpen } = props;
   const [title, setTitle] = useState("");
-  const dispatch = useDispatch();
   const [description, setDescription] = useState("");
   const [selectedIdx, setSelectedIdx] = useState(0);
+  const refTitle = useRef(null);
+  const refDescription = useRef(null);
+  const dispatch = useDispatch();
+
   const tags = ["None", "NSFW", "Mood", "Quotes", "Shitpost"];
+
   const handlePost = () => {
-    setIsOpen(false);
-    const newPost = {
-      title: title,
-      description: description,
-      tag: selectedIdx,
-    };
-    storeContent.set(newPost);
-    dispatch(createPost(newPost));
+    if (title === "" || description === "") {
+      alert("Vui lòng không để trống");
+      title === "" ? refTitle.current.focus() : refDescription.current.focus();
+    } else {
+      setIsOpen(false);
+      const newPost = {
+        title: title,
+        description: description,
+        tag: selectedIdx,
+      };
+      storeContent.set(newPost);
+      dispatch(createPost(newPost));
+    }
   };
 
   return (
@@ -33,12 +43,14 @@ const MakePost = (props) => {
         setData={setTitle}
         label="Title"
         classType="makepost-title"
+        refName={refTitle}
       />
       <Input
         inputType="textarea"
         setData={setDescription}
         label="Descriptions"
         classType="makepost-desc"
+        refName={refDescription}
       />
       <label htmlFor="" style={{ margin: "10px 0" }}>
         Tags

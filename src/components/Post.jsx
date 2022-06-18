@@ -1,38 +1,31 @@
 import { useSelector } from "react-redux";
-import { Section } from "../Common/index";
-import storeContent from "../db/storeContent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 const Post = () => {
   const post = useSelector((state) => state.post.posts);
   const tags = ["None", "NSFW", "Mood", "Quotes", "Shitpost"];
-  let postData = [storeContent.get()];
+  const handleDelete = (e) => {
+    alert("Chức năng đang tạm khóa. Mời bạn quay lại sau");
+  };
   return (
-    <Section css={`post-container`}>
-      {post.length === 0 ? (
-        <>
-          {postData.map((post, i) => (
-            <div className="posts" key={i}>
-              <p className="posts-title">{post.title}</p>
-              <p className={`posts-tags-${tags[post.tag]} posts-tags`}>
-                {tags[post.tag]}
-              </p>
-              <p className="posts-desc">{post.description}</p>
-            </div>
-          ))}
-        </>
-      ) : (
-        <>
-          {post.map((post, i) => (
-            <div className="posts" key={i}>
-              <p className="posts-title">{post.title}</p>
-              <p className={`posts-tags-${tags[post.tag]} posts-tags`}>
-                {tags[post.tag]}
-              </p>
-              <p className="posts-desc">{post.description}</p>
-            </div>
-          ))}
-        </>
-      )}
-    </Section>
+    <>
+      {post.map((post, i) => (
+        <div className="posts" key={i}>
+          <p className="posts-title">{post.title}</p>
+          <p className={`posts-tags-${tags[post.tag]} posts-tags`}>
+            {tags[post.tag]}
+          </p>
+          <p className="posts-desc">{post.description}</p>
+          <div>
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              className="posts-icon"
+              onClick={() => handleDelete(post.tag)}
+            />
+          </div>
+        </div>
+      ))}
+    </>
   );
 };
 

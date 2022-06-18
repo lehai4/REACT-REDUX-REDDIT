@@ -1,8 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import storeContent from "../db/storeContent";
 export const postSlide = createSlice({
   name: "post",
   initialState: {
-    posts: [],
+    posts: [
+      {
+        title: storeContent.get().title,
+        description: storeContent.get().description,
+        tag: storeContent.get().tag,
+      },
+    ],
   },
   reducers: {
     createPost: (state, action) => {

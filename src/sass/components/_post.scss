@@ -93,6 +93,15 @@
       color: white;
     }
   }
+  &-icon {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    &:hover {
+      opacity: 0.9;
+      color: #e97b6c;
+    }
+  }
 }
 .posts-title {
   font-size: 1.15rem;
